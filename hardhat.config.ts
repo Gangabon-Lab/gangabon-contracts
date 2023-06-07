@@ -1,7 +1,12 @@
-import { HardhatUserConfig } from "hardhat/config"
-import "@nomicfoundation/hardhat-toolbox"
+import * as dotenv from "dotenv"
 
-const config: HardhatUserConfig = {
+import "@nomiclabs/hardhat-etherscan"
+import "@nomicfoundation/hardhat-toolbox"
+import "hardhat-deploy"
+
+dotenv.config()
+
+const config = {
   solidity: {
     compilers: [
       {
@@ -27,7 +32,20 @@ const config: HardhatUserConfig = {
       },
     ],
   },
-
+  networks: {
+    sepolia: {
+      url: process.env.SEPOLIA_URL,
+      accounts: [process.env.PRIVATEKEY_DEPLOYER, process.env.PRIVATEKEY_DEV],
+    },
+  },
+  namedAccounts: {
+    deployer: {
+      default: 0,
+    },
+    dev: {
+      default: 1,
+    },
+  },
   mocha: {
     timeout: 180e3,
   },
@@ -36,7 +54,7 @@ const config: HardhatUserConfig = {
     target: "ethers-v5",
   },
   etherscan: {
-    apiKey: process.env.API_KEY,
+    apiKey: process.env.MAINNET_API_KEY,
   },
 }
 
