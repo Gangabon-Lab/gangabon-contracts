@@ -121,10 +121,10 @@ contract Gangabon is ERC1155, ReentrancyGuard, AutomationCompatible, Pausable, O
 		if(isMintReady) {
 			Application storage application = applications[applicationIdMinting];
 			_mint(application.owner, tokenId, 100, "");
-			tokenId++;
 			isMintReady = false;
 			applicationIdMinting = 0;
 			tokenIdToCid[tokenId] = application.cid;
+			tokenId++;
 		}
 	}
 
