@@ -84,8 +84,6 @@ contract Gangabon is ERC1155, ReentrancyGuard, AutomationCompatible, Pausable, O
 		addressVoted[msg.sender][_applicationId] = true;
 		Application storage application = applications[_applicationId];
 
-		application.totalVote +=1;
-
 		emit Voted(msg.sender, _applicationId, _vote);
 		
 		if(_vote == Vote.yay) {
